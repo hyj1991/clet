@@ -112,7 +112,9 @@ export async function matchFile(filePath: string, expected: Expected): Promise<v
     try {
       assert.matchRule(content, expected);
     } catch (err) {
-      err.message = `file(${filePath}) with content: ${err.message}`;
+      if (err instanceof Error) {
+        err.message = `file(${filePath}) with content: ${err.message}`;
+      }
       throw err;
     }
   }
@@ -141,7 +143,9 @@ export async function doesNotMatchFile(filePath: string, expected: Expected): Pr
     try {
       assert.doesNotMatchRule(content, expected);
     } catch (err) {
-      err.message = `file(${filePath}) with content: ${err.message}`;
+      if (err instanceof Error) {
+        err.message = `file(${filePath}) with content: ${err.message}`;
+      }
       throw err;
     }
   }

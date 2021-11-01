@@ -524,7 +524,11 @@ class Runner extends EventEmitter {
         } catch (err) {
           const msg = 'wait for prompt, but proccess is terminate with error';
           this.logger.error(msg);
-          throw new RunnerError(msg, err);
+          if (err instanceof Error) {
+            throw new RunnerError(msg, err);
+          } else {
+            throw err;
+          }
         }
       }
 
